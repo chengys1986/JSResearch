@@ -1,0 +1,54 @@
+<html>
+<head>
+<style>
+#container{
+    position: "absolute"
+    style.left: "100px"
+    style.top: "100px"
+}
+div {
+  width: 10px;
+  height: 10px;
+  background: orange;
+  float: left;
+}
+
+</style>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous">
+</script>
+<script>
+var globalID
+
+function repeatOften(count) {
+    if (count == 0) {
+        cancelAnimationFrame(globalID);
+    } else {
+        $("<div />").appendTo("body");
+        globalID = requestAnimationFrame(function() {repeatOften(count-1)});
+    }
+}
+window.onload = function() {
+    
+    $("#stop").on("click", function() {
+        cancelAnimationFrame(globalID);
+    });
+    
+    $("#start").on("click", function() {
+        var count = document.getElementById('myCount').value
+        globalID = requestAnimationFrame(function() {repeatOften(count)});
+        
+    });
+}
+</script>
+</head>
+<body>
+    <div id="container">
+        <input type="text" id="myCount">
+        <button id="start">start</button>
+        <button id="stop">stop</button>
+    </div>
+</body>
+</html>
